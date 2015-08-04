@@ -206,44 +206,6 @@ public class NavigationActivity extends FragmentActivity {
 		}
 	};
 
-	// Old list data containing only strings
-	private void prepareListData() {
-		listDataHeader = new ArrayList<String>();
-		listDataChild = new HashMap<String, List<String>>();
-
-		// Adding Header data
-		listDataHeader.add("Batsman");
-		listDataHeader.add("Bowler");
-		listDataHeader.add("All rounder");
-		listDataHeader.add("Wicket keeper");
-
-		// Adding child data
-		List<String> batsman = new ArrayList<String>();
-		batsman.add("V. Kohli");
-		batsman.add("G.J. Bailey");
-		batsman.add("H.M. Amla");
-
-		List<String> bowler = new ArrayList<String>();
-		bowler.add("D.W. Steyn");
-		bowler.add("J.M. Anderson");
-		bowler.add("M.G. Johnson");
-
-		List<String> all = new ArrayList<String>();
-		all.add("R.A. Jadeja");
-		all.add("Shakib Al Hasan");
-		all.add("D.J. Bravo");
-
-		List<String> wk = new ArrayList<String>();
-		wk.add("A.B. de Villiers");
-		wk.add("M.S. Dhoni");
-		wk.add("K.C. Sangakkara");
-
-		listDataChild.put(listDataHeader.get(0), batsman); // Header, Child data
-		listDataChild.put(listDataHeader.get(1), bowler);
-		listDataChild.put(listDataHeader.get(2), all);
-		listDataChild.put(listDataHeader.get(2), wk);
-	}
-
 	// TO PREPARE THE NEW LIST DATA
 	private void prepareNewListData() {
 		mHeaderList = new ArrayList<HeaderBean>();
@@ -323,17 +285,6 @@ public class NavigationActivity extends FragmentActivity {
 		private ArrayList<HeaderBean> _HeaderList;
 		private ArrayList<ChildBean> _ChildList;
 
-		// Old Constructor
-
-		// public ExpandableListAdapter(Context context,
-		// List<String> listDataHeader,
-		// HashMap<String, List<String>> listChildData) {
-		// this._context = context;
-		// this._listDataHeader = listDataHeader;
-		// this._listDataChild = listChildData;
-		// }
-
-		// DIFFERNT CONSTRUCTOR FOR DIFFERENT PARAMS
 		public ExpandableListAdapter(Context context,
 				ArrayList<HeaderBean> _HeaderList,
 				ArrayList<ChildBean> _ChildList) {
@@ -348,10 +299,6 @@ public class NavigationActivity extends FragmentActivity {
 			// Return child object from each header item
 			return this._HeaderList.get(groupPosition).getmChildBean()
 					.get(childPosititon);
-
-			// return this._listDataChild.get(
-			// this._listDataHeader.get(groupPosition))
-			// .get(childPosititon);
 		}
 
 		@Override
@@ -362,11 +309,6 @@ public class NavigationActivity extends FragmentActivity {
 		@Override
 		public View getChildView(int groupPosition, final int childPosition,
 				boolean isLastChild, View convertView, ViewGroup parent) {
-
-			// We wont need this coz we have our own class and not String, whose
-			// object returns the string saved
-			// final String childText = (String) getChild(groupPosition,
-			// childPosition);
 
 			if (convertView == null) {
 				LayoutInflater infalInflater = (LayoutInflater) this._context
@@ -392,23 +334,18 @@ public class NavigationActivity extends FragmentActivity {
 		@Override
 		public int getChildrenCount(int groupPosition) {
 			return this._HeaderList.get(groupPosition).getmChildBean().size();
-
-			// return this._listDataChild.get(
-			// this._listDataHeader.get(groupPosition)).size();
 		}
 
 		@Override
 		public Object getGroup(int groupPosition) {
 			return this._HeaderList.get(groupPosition);
 
-			// return this._listDataHeader.get(groupPosition);
 		}
 
 		@Override
 		public int getGroupCount() {
 			return this._HeaderList.size();
 
-			// return this._listDataHeader.size();
 		}
 
 		@Override
@@ -420,8 +357,6 @@ public class NavigationActivity extends FragmentActivity {
 		public View getGroupView(int groupPosition, final boolean isExpanded,
 				View convertView, ViewGroup parent) {
 
-			// DONT NEED THIS AS WELL, COZ CUSTOM ARRAYLIST
-			// String headerTitle = (String) getGroup(groupPosition);
 			if (convertView == null) {
 				LayoutInflater infalInflater = (LayoutInflater) this._context
 						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
